@@ -2,7 +2,7 @@
 
 Exemplo de estrutuas de pastas em node para api rest.
 
-````
+```
 src/
         app/
             controllers/
@@ -23,5 +23,4 @@ src/
     tmp/
         uploads/
     tools/
-````
-
+```
