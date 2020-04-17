@@ -1,4 +1,4 @@
-Iniciando no AdonisJS
+# Iniciando no AdonisJS
 
 ## Os primeiros passos para com o AdonisJS
 
@@ -16,8 +16,8 @@ Iniciando no AdonisJS
 
 - Antes de rodar o servidor é necessário que vc tenha um banco de dados disponível, no arquivo  config/databases.js o adonis disponibiliza diversos bancos pré-configurados para vc utilizar, basta instalar os drivers do mesmo no seu projeto. Nesse exemplo vamos utilizar o postgres, segue o comando que está nesse mesmo arquivo para poder utiliza-lo.
 
-- ````
-npm i --save pg
+  ````
+  npm i --save pg
   ````
 
 
@@ -76,44 +76,42 @@ Nota-se que o códio é bem mais enxuto comparado ao express.
 - Depois disso edite o arquivo route.js para criar a Rota
 
   ````javascript
-'use strict'
+  'use strict'
   
-  ````
-
-const Route = use('Route')
-
+  const Route = use('Route')
+  
   Route.post('users', 'UserController.store')
   ````
 
-
-
-### Pronto, vc fez sua primeira inserção de dados na tabela usando AdonisJS.
-
-- Caso queira ver todas as Rotas disponíveis na sua aplicação digite esse comando no terminal.
-
-  ````
-  adonis route:list
-  ````
-
-- Criando um Token do Usuário, edite o arquivo SessionController depois de executar o comando ( adonis make:controller Session ) e logo após crie a rota.
+  Pronto, vc fez sua primeira inserção de dados na tabela usando AdonisJS.
 
   
 
-  ````javascript
+  Caso queira ver todas as Rotas disponíveis na sua aplicação digite esse comando no terminal.
+
+  ````
+    adonis route:list
+  ````
+
+  
+
+Criando um Token do Usuário, edite o arquivo SessionController depois de executar o comando ( adonis make:controller Session ) e logo após crie a rota.
+
+````javascript
 'use strict'
-  
-  class SessionController {
-    async store ({ request, response, auth }) {
-      const { email, password } = request.all();
-  
-      const token = await auth.attempt(email, password)
 
-      return token
+class SessionController {
+  async store ({ request, response, auth }) {
+    const { email, password } = request.all();
+
+    const token = await auth.attempt(email, password)
+
+    return token
   }
-  }
-  
-  module.exports = SessionController
-  ````
+}
+
+module.exports = SessionController
+````
 
   Antes de começar é necessário que já tenha a a funcionalidade de Token pronta na aplicação, como SessionController e etc.
 
