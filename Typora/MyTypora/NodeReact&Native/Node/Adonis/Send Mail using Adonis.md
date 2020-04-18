@@ -44,7 +44,9 @@ smtp: {
   },
 ```
 
-## Utilize o MailTrap para para fazer os testes de envio de Email, acesse o site e faça seu login: https://mailtrap.io/
+## Usando o MailTrap
+
+Utilize o MailTrap para para fazer os testes de envio de Email, acesse o site e faça seu login: https://mailtrap.io/
 
 Edite o arquivo .env da sua aplicação adicionando os seguintes campos e dados passados pelo MailTrap.
 
@@ -146,3 +148,80 @@ Nosso ForgotPasswordController ficou da seguinte maneira:
 Pronto!  Reinicia seu servidor e faça o teste usando o insomnia.
 
 <img title="" src="../../../../UpImgsTypora/image-20200417133030801.png" alt="image-20200417133030801" width="719" data-align="center">
+
+## Update da Senha
+
+Beleza, agora o próximo passo é fazermos o update no controller para efetivar a alteração de senha.
+
+No arquivo **ForgotPasswordController.js** iremos adicionar a função update.
+
+```javascript
+async update ({ request, response }) {
+    try {
+    
+    }catch {
+        return response.status(error.status).send({ error: { message: 'Algo deu errado ao resetar sua senha' }})
+    }
+}
+```
+
+> Já adicionamos tbm a mensagem de erro caso o try não funcione.
+
+Para não esqucer vamos tbm adicionar a rota em 'start/routes.js' de acardo com meu arquivo, ficará assim:
+
+```javascript
+'use strict'
+
+const Route = use('Route')
+
+Route.post('users', 'UserController.store')
+
+Route.post('sessions', 'SessionController.store')
+
+Route.post('passwords', 'ForgotPasswordController.store')
+Route.put('passwords', 'ForgotPasswordController.update')
+```
+
+Vamos deixar nosso insomnia pronto para fazer a requisição, ficará da seguinte Maneira:
+
+![](H:\Nuvem\FernellaDev\Notes\Typora\UpImgsTypora\2020-04-18-20-38-50-image.png)
+
+> Note que o campo token: se refere ao que está armazedo no usuário, no campo que ciramos depois de alterar sua migration, adicionado o token e token_created_at.
+
+---
+
+Agora vamos adicionar um pacote para manipular datas no adonis 
+
+```js
+npm install moment //(Tipo o date-fns)
+```
+
+---
+
+Voltando para o ***ForgotPasswordController***.js após o Try colocaremos o seguinte código:
+
+```javascript
+try {
+      const { token, password } = request.all() //Pegando todas os valores passados no corpo da requisição
+
+      const user = await User.findByOrFail('token', token)
+
+      //Verifica se faz mais de dois dias que essa requisição foi feita, se sim, ela é negada
+      const tokenExpired =  moment()
+        .subtract('2','days') //Nessa função os paramentros são a qauntidades de dias que vc está subtraindo da data atual
+        .isAfter(user.token_created_at) //irá comparar com o valor da data do created_at
+
+        if(tokenExpired){
+          return response.status(401).send({ error: { message: 'Token expirado.' }})
+        }
+
+        user.token = null
+        user.token_created_at = null
+        user.password = password
+
+        await user.save()
+
+    }
+```
+
+Pronto, agora podemos testar se a requisição está sendo feita corretamente. Utilize o insomnia que já deixamos pronto para fazer o Update da senha e Voalá. senah alterada com sucesso. 
