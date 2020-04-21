@@ -158,7 +158,7 @@ No arquivo **ForgotPasswordController.js** iremos adicionar a função update.
 ```javascript
 async update ({ request, response }) {
     try {
-    
+
     }catch {
         return response.status(error.status).send({ error: { message: 'Algo deu errado ao resetar sua senha' }})
     }
