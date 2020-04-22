@@ -1,10 +1,10 @@
-# Send Mail para recuperar Senha com AdonisJS
+#  Send Mail para recuperar Senha com AdonisJS
 
 Antes de começar é necessário que já tenha a a funcionalidade de Token pronta na aplicação, como SessionController e etc.
 
 Caso tenha alguma dúvida olhe o site: https://adonisjs.com/docs/4.1/mail  para obter melhores informações.
 
-### Instalando as dependência de e-mails do Adonis.
+## Instalando as dependência de e-mails do Adonis.
 
 Digite o seguinte comando no terminal.
 

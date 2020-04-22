@@ -1,6 +1,6 @@
 # Estruturas de pastas em Node
 
-Exemplo de estrutuas de pastas em node para api rest.
+Exemplo de estrutuas de pastas em node para uma api rest.
 
 ```
 src/

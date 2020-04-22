@@ -22,7 +22,7 @@ npm i --save pg
 
 Depois de ter instalado é necessário que edite o arquivo .env onde estará armazenada as configurações globais da aplicação.
 
-```javascript
+```js
 DB_CONNECTION=pg
 DB_HOST=192.168.99.100
 DB_PORT=5432
@@ -37,7 +37,7 @@ Coloque o servidor ONLINE, e a opção --dev ativa a funcionalidade do "nodemon"
 adonis serve --dev
 ```
 
-Através de outro terminal, faça a migração das migrations pré-criadas pelo adonis, User and Token
+Através de outro terminal, faça a migração das **migrations** pré-criadas pelo adonis, User and Token
 
 ```javascript
 adonis migration:run
@@ -103,5 +103,3 @@ class SessionController {
 
 module.exports = SessionController
 ```
-
-- [x] 
