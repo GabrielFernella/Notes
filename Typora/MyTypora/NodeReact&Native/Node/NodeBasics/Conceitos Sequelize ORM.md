@@ -13,13 +13,11 @@ Migration
 - Mantém a base de dados atualizadas entre os devs e é ordenada por data
 - Cada migration deve realizar alterações em apenas uma tabela
 
-
-
 Seeds 
 
-    - Populam a base de dados para testes
-    - Utilizado para testes
-    - Jamais utilizados em produção
+- Populam a base de dados para testes
+- Utilizado para testes
+- Jamais utilizados em produção
 
 ---
 
@@ -31,15 +29,13 @@ Seeds
 
 - View: Retorno ao cliente, retorno json para o frontend poder manipular da melhor maneira.
 
-  
-
-Faces de um Controller
+### Faces de um Controller
 
 - Classes
 - Sempre retorna um json
 - Não chama outro controller/método              
 - Quando criar um novo controller, apenas 5 métodos, precisa ser da mesma entidade
-- Métodos = index, show, store, update, delete              
+- Métodos: index, show, store, update, delete              
 
 ---
 
@@ -52,9 +48,5 @@ Características das Assinaturas:
 - headers: cabeçalho, tipo do algoritmo
 
 - Payload: Dados Adicionais
+
 - Assinatura: Garante que o token não foi alterado por algum usuário
-
-
-
-
-
