@@ -1,4 +1,4 @@
-#  Send Mail para recuperar Senha com AdonisJS
+# Send Mail para recuperar Senha com AdonisJS
 
 Antes de começar é necessário que já tenha a a funcionalidade de Token pronta na aplicação, como SessionController e etc.
 
@@ -219,7 +219,7 @@ try {
         user.token_created_at = null
         user.password = password
 
-        await user.save()
+        await user.save()''
 
     }
 ```

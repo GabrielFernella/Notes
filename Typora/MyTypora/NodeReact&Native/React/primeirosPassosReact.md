@@ -1,16 +1,25 @@
+
+
+
+
+
 # Primeiros passos com React
-
-1. ata
-2. dasdasd
-3. asdasd
-
-asdasdasd
-asdasda
-
 * dasd
 * dasdasd
 * sdasdasd
-
+0986
+1. ata
+2. dasdasd
+3. asdasd
 > gfsdfsdf
-> sdfsdfsdfsdf
 > sdfsdfs
+> sdfsdfsdfsdf
+asdasda
+asdasdasd
+dasd
+ewrwrw/6tasa
+dasdas
+
+- dasdas
+- sdsdjabsçdj
+- dasdakjsbd

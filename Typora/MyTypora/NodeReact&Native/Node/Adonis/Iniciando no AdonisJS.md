@@ -1,4 +1,4 @@
-# 'Iniciando no AdonisJS
+# Iniciando no AdonisJS
 
 ## Os primeiros passos para com o AdonisJS
 
