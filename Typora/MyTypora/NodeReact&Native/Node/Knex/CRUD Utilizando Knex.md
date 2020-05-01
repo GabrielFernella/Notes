@@ -25,7 +25,7 @@ Crie sua pasta onde estará armazenando sua API da seguinte forma: Myapi/src/ser
 
 Após criar o arquivo, vá ao terminal e digite:
 
->Para instalar o package menager
+> Para instalar o package menager
 
 ```
 npm init -y 
@@ -51,11 +51,11 @@ Agora temos que instalar mais alguns pacotes npm, são eles:
 npm install knex pg express
 ```
 
->knex - Query Builder
->
->pg - Driver para banco de dados postgres
->
->express - framework
+> knex - Query Builder
+> 
+> pg - Driver para banco de dados postgres
+> 
+> express - framework
 
 O próximo comando irá executar o knex para criar um arquivo de configuração para o knex
 
@@ -124,7 +124,7 @@ exports.up = knex => knex.schema.createTable('users', function(table){
         table.timestamp('created_at').defaultTo(knex.fn.now())
         table.timestamp('updated_at').defaultTo(knex.fn.now())
     })
-    
+
 
 exports.down = knex => knex.schema.dropTable('users')
 ```
@@ -162,7 +162,6 @@ exports.seed = function(knex) {
       ]);
     });
 };
-
 ```
 
 Para rodar esse seed basta digitar no terminal
@@ -287,7 +286,7 @@ module.exports = {
                 .where({ id })
 
             return res.send()
-            
+
         } catch (error) {
             next(error)
         }
@@ -335,6 +334,13 @@ const app = express()
 app.use(express.json())
 app.use(routes)
 
+//not found - Mensagem de erro
+app.use((req,res,next)=> {
+    const error = new Error('Not found')
+    error.status = 404
+    next(error)
+})
+
 //catch all
 app.use((error,req,res,next) => {
     res.status(error.status || 500)
@@ -342,8 +348,393 @@ app.use((error,req,res,next) => {
 })
 
 
-app.listen(3333, ()=> console.log('server is running'));
+app.listen(3333, () => console.log('server is running'));
 ```
+
+---
+
+## Criando Table Projetos foreing key
+
+Agora criaremos a tebela projetos para fazer a chave estrangeira entre projetos e users.
+
+```powershell
+npx knex migrate:make create_projects_table
+```
+
+Criará um arquivo na migration, vamos editar ele da seguinte maneira.
+
+```js
+exports.up = knex => knex.schema.createTable('projects', function(table){
+    table.increments('id')
+    table.text('title')
+
+    //relacionamento 1 user pra n projetos
+    table.integer('user_id')
+        .references('users.id')
+        .notNullable()
+        .onDelete('CASCADE')
+
+    table.timestamp(true, true)
+})
+
+
+exports.down = knex => knex.schema.dropTable('projects')
+
+```
+
+Após concluir a alteração, rode o comando ara efetivar essa tabela no banco de dados
+
+```
+npx knex migrate:latest
+```
+
+Crie um Seed para essa tabela 
+
+```
+npx knex seed:make 002_projects
+```
+
+No arquivo gerado, preencha-o da seguinte maneira.
+
+```js
+exports.seed = function(knex) {
+  // Deletes ALL existing entries
+  return knex('projects').del()
+    .then(function () {
+      // Inserts seed entries
+      return knex('projects').insert([
+        {
+          user_id:5,
+          title: "Meu projeto"
+        }
+      ]);
+    });
+};
+```
+
+> O id que usei começa do 5 pois confirme eu deletei alguns usuários, eu verifiquei no meu banco quais estavam  disponíveis e posso incrementar valor aos mesmos.
+
+Para rodar esse seed, é necessário que você especifique o arquivo, pois pode haver erro se compilar o seed anterior novamente.
+
+```
+npx knex seed:run --specific 002_projects.js
+```
+
+O comando a baixo serve para fazer um rolback nas migrations
+
+```
+npx knex migrate:rollback --all 
+```
+
+Desfaz todas as migrations.
+
+---
+
+## Criando Controller da tabela Project
+
+Antes de criar o controller propriamente dito, vamos já incrementar os métodos nas rotas
+
+### Rotas
+
+```js
+const express = require('express')
+const routes = express.Router()
+
+const UserController = require('./controllers/UserController')
+const ProjectController = require('./controllers/ProjectController')
+
+routes
+    //Users
+    .get('/users', UserController.index)
+    .post('/users', UserController.create)
+    .put('/users/:id', UserController.update)
+    .delete('/users/:id', UserController.delete)
+
+    //Projects
+    .get('/projects', ProjectController.index)
+    .post('/projects', ProjectController.create)
+
+
+module.exports = routes
+```
+
+> Outro jeito de escrever as rotas de maneira mais sucinta 
+>
+
+### Controller com paginação de Projetos
+
+```js
+const knex = require('../database')
+
+module.exports = {
+    //Como podem ser as requisições
+    //   /projects?user_id=5 ou apenas /projects
+    //Está usando paginação, para percorrer para as próximas paginas /projects?page=2
+    async index(req,res,next) {
+        try {
+            const { user_id, page = 1 } = req.query;
+
+            const query = knex('projects')
+            .limit(5)
+            .offset((page-1) * 5)
+
+            const countProjectUser = knex('projects').count()
+
+            if(user_id){
+                query
+                    .where({ user_id })
+                    .join('users', 'users.id', '=', 'projects.user_id') //Fazendo o Join entre a tabela de users e projects
+                    .select('projects.*', 'users.username') // selecionado os valores que deverão ser retornados da tabela
+
+                countProjectUser
+                    .where({user_id})
+            }
+
+            const [count] = await countProjectUser;
+            res.header('X-Total-Count', count["count"])
+
+            const results = await query;
+
+        return res.json(results)
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    async create(req,res,next){
+        try {
+            const { title, user_id} = req.body;
+
+            await knex('projects').insert({
+                title,
+                user_id
+            })
+
+            return res.status(201).send()
+            
+        } catch (error) {
+            next(error)
+        }
+    },
+}
+
+```
+
+---
+
+## Soft Delete
+
+Uma breve explicação, o soft delete é para não excluirmos necessariamente o projeto, mas atribuir uma coluna delete.
+
+Usaremos o seguinte comando para adicionar a coluna 
+
+```
+npx knex migrate:make add_column_delete_at_to_users
+```
+
+Após criar o arquivo de migrate, vamos editar ela 
+
+```js
+exports.up = knex => knex.schema.alterTable('users', function(table){
+    table.timestamp('deleted_at')
+})
+
+
+exports.down = knex => knex.schema.alterTable('users', function(table){
+    table.dropColumn('deleted_at')
+})
+```
+
+Efetivando alterações 
+
+```
+npx knex migrate:latest
+```
+
+Edite a função delete de UserController
+
+```js
+async index(req,res) {
+        const results = await knex('users')
+            .where('deleted_at',null)
+
+        return res.json(results)
+    },
+```
+
+&
+
+```js
+async delete(req,res){
+        try {
+            const { id } = req.params
+            await knex('users')
+                .where({id : id}) //outro exemplo
+                .update('deleted_at', new Date())
+
+            return res.send()
+        } catch (error) {
+            next(error)
+        }
+    },
+```
+
+No Project Controller, acrescente a ultima linha depois do if que valida os projetos contida em async index
+
+```js
+if(user_id){
+                query
+                    .where({ user_id })
+                    .join('users', 'users.id', '=', 'projects.user_id') 
+    //Fazendo o Join entre a tabela de users e projects
+                    .select('projects.*', 'users.username') 
+    // selecionado os valores que deverão ser retornados da tabela
+                    .where('users.deleted_at',null) //Essa aqui
+```
+
+---
+
+## Procedures & Triggers (updated_at)
+
+### 
+
+### Criando uma Trigger ou Procedure
+
+```
+npx knex migrate:make add_column_functions
+```
+
+Para fazermos uma trigger bem feita, ela deverá ser compilada antes das tabelas já executadas, para isso, renomeie o arquivo no intuito de mostrar ao sistema que ela foi criada antes das outras tabelas e edite o arquivo da seguinte maneira.
+
+```js
+const CUSTOM_FUNCTIONS = `
+    CREATE OR REPLACE FUNCTION on_update_timestamp()
+    RETURNS trigger AS $$
+    BEGIN
+        NEW.updated_at = now();
+        RETURN NEW;
+    END;
+    $$ language 'plpgsql';
+`
+
+const DROP_CUSTOM_FUNCTIONS = `
+    DROP FUNCTION on_update_timestamp()
+`
+
+exports.up = async knex => {
+    return knex.raw(CUSTOM_FUNCTIONS)
+}
+
+exports.down = async knex => {
+    return knex.raw(DROP_CUSTOM_FUNCTIONS)
+}
+```
+
+### Função de execução da trigger ou procedure
+
+Agora vá até a raiz do projeto e vamos editar o arquivo knexfile.js 
+
+```js
+// Update with your config settings.
+
+module.exports = {
+
+  development: {
+    client: 'pg',
+    connection: {
+      host : '192.168.99.100',
+      port : '5432',
+      user : 'postgres',
+      password : 'docker',
+      database : 'knexDatabase'
+    },
+    migrations: {
+      tableName: 'migrations',
+      directory: `${__dirname}/src/database/migrations`
+    },
+    seeds: {
+      directory: `${__dirname}/src/database/seeds`
+    },
+  },
+  onUpdateTrigger: table => 
+  `
+    CREATE TRIGGER ${table}_updated_at
+    BEFORE UPDATE ON ${table}
+    FOR EACH ROW
+    EXECUTE PROCEDURE on_update_timestamp();
+  `
+};
+
+```
+
+Edite as seguintes migrations:
+
+User Migrations
+
+```js
+const { onUpdateTrigger } = require('../../../knexfile')
+
+//utilizando arrow function
+exports.up = async knex => knex.schema.createTable('users', function(table){
+        table.increments('id')
+        table.text('username').unique().notNullable()
+
+        table.timestamp('created_at').defaultTo(knex.fn.now())
+        table.timestamp('updated_at').defaultTo(knex.fn.now())
+    }).then( () => knex.raw(onUpdateTrigger('users')))
+    
+
+exports.down = async knex => knex.schema.dropTable('users')
+```
+
+Project Migration
+
+```js
+const { onUpdateTrigger } = require('../../../knexfile')
+
+exports.up = async knex => knex.schema.createTable('projects', function(table){
+    table.increments('id')
+    table.text('title')
+
+    //relacionamento 1 user pra n projetos
+    table.integer('user_id')
+        .references('users.id')
+        .notNullable()
+        .onDelete('CASCADE')
+
+    table.timestamps(true, true)
+}).then( () => knex.raw(onUpdateTrigger('projects')))
+
+
+exports.down = async knex => knex.schema.dropTable('projects')
+
+```
+
+
+
+Faça um Rollback para desfazer todas as tabelas e refaça novamente
+
+```
+npx knex migrate:rollback --all
+```
+
+```
+npx knex migrate:latest
+```
+
+Faça o teste com seus seeds
+
+```
+npx knex seed:run --specific 001_users.js
+```
+
+```
+npx knex seed:run --specific 002_projects.js
+```
+
+### 
+
+
 
 
 
