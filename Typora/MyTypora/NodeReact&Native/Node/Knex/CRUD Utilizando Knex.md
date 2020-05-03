@@ -379,7 +379,6 @@ exports.up = knex => knex.schema.createTable('projects', function(table){
 
 
 exports.down = knex => knex.schema.dropTable('projects')
-
 ```
 
 Após concluir a alteração, rode o comando ara efetivar essa tabela no banco de dados
@@ -459,7 +458,6 @@ module.exports = routes
 ```
 
 > Outro jeito de escrever as rotas de maneira mais sucinta 
->
 
 ### Controller com paginação de Projetos
 
@@ -511,13 +509,12 @@ module.exports = {
             })
 
             return res.status(201).send()
-            
+
         } catch (error) {
             next(error)
         }
     },
 }
-
 ```
 
 ---
@@ -596,8 +593,6 @@ if(user_id){
 
 ## Procedures & Triggers (updated_at)
 
-### 
-
 ### Criando uma Trigger ou Procedure
 
 ```
@@ -664,7 +659,6 @@ module.exports = {
     EXECUTE PROCEDURE on_update_timestamp();
   `
 };
-
 ```
 
 Edite as seguintes migrations:
@@ -682,7 +676,7 @@ exports.up = async knex => knex.schema.createTable('users', function(table){
         table.timestamp('created_at').defaultTo(knex.fn.now())
         table.timestamp('updated_at').defaultTo(knex.fn.now())
     }).then( () => knex.raw(onUpdateTrigger('users')))
-    
+
 
 exports.down = async knex => knex.schema.dropTable('users')
 ```
@@ -707,10 +701,7 @@ exports.up = async knex => knex.schema.createTable('projects', function(table){
 
 
 exports.down = async knex => knex.schema.dropTable('projects')
-
 ```
-
-
 
 Faça um Rollback para desfazer todas as tabelas e refaça novamente
 
@@ -733,10 +724,3 @@ npx knex seed:run --specific 002_projects.js
 ```
 
 ### 
-
-
-
-
-
-
-
