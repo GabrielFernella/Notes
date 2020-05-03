@@ -104,4 +104,3 @@ adonis migration:run
 ```
 
 ---
-
