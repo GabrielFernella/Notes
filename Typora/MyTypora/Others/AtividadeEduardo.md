@@ -21,4 +21,8 @@
 
   - Criar config sequelizerc para montar o path dos arquivos do sequelize
 
-  - 
+  - ```js
+    const 
+    ```
+  
+    

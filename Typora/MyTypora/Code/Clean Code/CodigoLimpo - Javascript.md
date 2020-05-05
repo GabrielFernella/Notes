@@ -1,6 +1,4 @@
-Repositório original: [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
-
-# Clean-code-Javascript
+# Aprendendo Clean-code-Javascript
 
 ## Índice
 
@@ -2148,3 +2146,5 @@ Existem traduções disponíveis em outras linguas:
 - ![ja](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japonês**: [mitsuruog/clean-code-javascript/](https://github.com/mitsuruog/clean-code-javascript/)
 - ![id](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Indonesia.png) **Indonésio**:
   [andirkh/clean-code-javascript/](https://github.com/andirkh/clean-code-javascript/)
+- Repositório original: [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
+  

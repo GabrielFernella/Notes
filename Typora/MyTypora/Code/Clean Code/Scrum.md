@@ -1,4 +1,6 @@
-# Método SCRUM — Um resumo de tudo o que você precisa saber
+# Método SCRUM
+
+# Um resumo de tudo o que você precisa saber
 
 
 
