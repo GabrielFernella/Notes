@@ -1,6 +1,6 @@
 Repositório original: [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
 
-# Clean-code-javascript
+# Clean-code-Javascript
 
 ## Índice
 
