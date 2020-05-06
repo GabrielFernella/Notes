@@ -2147,4 +2147,3 @@ Existem traduções disponíveis em outras linguas:
 - ![id](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Indonesia.png) **Indonésio**:
   [andirkh/clean-code-javascript/](https://github.com/andirkh/clean-code-javascript/)
 - Repositório original: [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
-  
