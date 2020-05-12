@@ -29,7 +29,7 @@ Além disse crie um arquivo chamado main.js e edite o package.json da seguinte m
 
 ---
 
-## Primeira Tela 
+## Primeira Tela
 
 No arquivo Main, podemos preencher da seguinte maneira para fazer um teste
 
@@ -88,8 +88,6 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
 }
 ```
-
-
 
 #### Main.js
 

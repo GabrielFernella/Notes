@@ -1,15 +1,32 @@
 # NodeJS e Sequelize
 
-Ordem de Processos
+
+
+## Ordem de Processos
+
+1. Configurar ambiente
+
+2. Instalar dependências e montar estrutura (subrase, sequelize e etc)
+
+3. config database
+
+4. montar migration
+
+5. criar model
+
+6. Criar o Loader de Model / Editar
+
+7. Criar Controller
+8. add route
 
 Vamos levantar os Processos para nosso CRUD Utilizando Sequelize
 
-## Dependencias
+## Dependências
 
 ```jsx
-yarn init -y
-yarn add express pg pg-hstore sequelize
-yarn add sequelize-cli nodemon -D
+npm init -y
+npm install express pg pg-hstore sequelize
+npm install sequelize-cli nodemon sucrase -D
 ```
 
 ## Comandos Sequelize
@@ -43,25 +60,39 @@ Depois de criar seu projeto pelo comando abaixo vc deverá instalar as dependên
 
 ```jsx
 {
-  "name": "sqlnode",
+  "name": "API-Gobarber",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server",
+    "dev:debug": "nodemon --inspect src/server"
   },
   "dependencies": {
     "express": "^4.17.1",
-    "pg": "^7.12.1",
+    "pg": "^8.1.0",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.19.6"
+    "sequelize": "^5.21.8"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4",
-    "sequelize-cli": "^5.5.1"
+    "nodemon": "^2.0.3",
+    "sequelize-cli": "^5.5.1",
+    "sucrase": "^3.14.0"
   }
 }
 ```
+
+Na Raiz do projeto, crie um arquivo chamado `nodemon.json`, insira o seguinte código para configurar o sucrase
+
+```json
+{
+    "execMap": {
+        "js": "node -r sucrase/register"
+    }
+}
+```
+
+
 
 ---
 
@@ -72,39 +103,64 @@ Dentro de src, crie os seguintes arquivos
 ```jsx
 server.js
 routes.js
+app.js
 config/database.js    //onde ficara as configurações do projeto 
 database/migrations & index.js // pasta relacionada a conexão com o banco de dados
 ```
 
 Abaixo estará com os arquivos já preenchidos
 
+### app.js
+
+```js
+import express from 'express';
+import routes from'./routes';
+
+import './database';
+
+class App {
+    constructor(){
+        this.server = express();
+
+        this.middlewares()
+        this.routes()
+    }
+
+    middlewares(){
+        this.server.use(express.json());
+    }
+
+    routes(){
+        this.server.use(routes)
+    }
+}
+
+export default new App().server
+```
+
+### 
+
 ### server.js
 
 ```jsx
-onst express = require('express'); // user o express
-const routes = require('./routes'); //importar as totas
+import app from'./app';
 
-require('./database');
-
-const app = express();
-
-app.use(express.json());
-app.use(routes);
-
-app.listen(3333);
+app.listen(3333)
 ```
 
 ### routes.js
 
 ```jsx
-const express = require('express');
+import { Router } from'express'; //import feito pelo sucrase
 
-const routes = express.Router();
+import UserController from './app/controllers/UserController';
 
-routes.get('/users', UserController.index); // Uma rota para teste
-routes.post('/users', UserController.store); // Uma rota para teste
+const routes = new Router();
 
-module.exports = routes;
+routes.post('/users', UserController.store);
+
+
+export default routes;
 ```
 
 ### config/database.js
@@ -121,6 +177,7 @@ module.exports = {
   define: {
     timestamps: true, //cria o created_at e updated_at automaticamente
     underscored: true,
+    underscoredAll: true,
   },
 };
 ```
@@ -128,6 +185,31 @@ module.exports = {
 ### database/index.js
 
 ```jsx
+import Sequelize from 'sequelize';
+
+import databaseConfig from '../config/database';
+
+import User from '../app/models/User';
+
+const models = [User];
+
+class Database {
+    constructor(){
+        this.init();
+    }
+
+    init(){
+        this.connection = new Sequelize(databaseConfig)
+
+        models.map(model => model.init(this.connection));
+    }
+}
+
+
+export default new Database();
+
+/////////////////////OU
+
 const Sequelize = require('sequelize');
 const dbConfig = require('../config/database'); //importando as credenciais 
 
@@ -149,12 +231,14 @@ module.exports = connection;
 Antes de prosseguir, o sequelize precisa entender onde estão os arquivos de configurações do sequelize, para isso, criamos um arquivo na raiz do projeto chamado: " .sequelizerc" e preenchemos ele da seguinte maneira.
 
 ```jsx
-const path = require('path'); // para lidar com caminhos
+const { resolve } = require('path');
 
 module.exports = {
-  config: path.resolve(__dirname, 'src', 'config', 'database.js'),
-  'migrations-path': path.resolve(__dirname, 'src', 'database', 'migrations'),
-};
+    config: resolve(__dirname, 'src', 'config', 'database.js'),
+    'models-path': resolve(__dirname, 'src', 'app', 'models'),
+    'migrations-path': resolve(__dirname, 'src', 'database', 'migrations'),
+    'seeders-path': resolve(__dirname, 'src', 'database', 'seeds'),
+}
 ```
 
 Após fazer todos os processos acima, ative o banco de dados docker e rode o seguinte comando:
@@ -227,6 +311,26 @@ Para fazer a primeira parte de inserção de registros precisamos criar nosso mo
 Para tal crie o seguinte arquivo dentro de src/models/User.js
 
 ```jsx
+//Tudo que o será alterado através do usuário 
+import Sequelize, { Model } from 'sequelize'
+
+class User extends Model {
+    static init (sequelize){
+        super.init({
+            name: Sequelize.STRING,
+            email: Sequelize.STRING,
+            password_hash: Sequelize.STRING,
+            provider: Sequelize.BOOLEAN
+        },
+        {
+            sequelize
+        }
+    );
+    }
+}
+
+export default User;
+/////////OU
 const { Model, DataTypes } = require('sequelize');
 
 class User extends Model {
@@ -245,6 +349,8 @@ module.exports = User;
 
 No arquivo index, dentro da pasta database, importamos o model para comprarar com o banco de dados, nessa parte, apenas para explicar.
 
+EX:
+
 ```jsx
 const User = require('../models/User');  //importar o model de user
 
@@ -262,6 +368,24 @@ User.associate(connection.models);
 Na pasta src, criaremos um arquivo dentro de controller, com seguinte caminho: src/controller/UserController.js
 
 ```jsx
+import User from '../models/User';
+
+class UserController {
+    async store(req,res){
+        const userExists = await User.findOne({ where: { email: req.body.email }})
+        if(userExists){
+            return res.status(400).json({error: 'User alredy exists' })
+        }
+
+        const {id, name, email,provider} = await User.create(req.body)
+        
+        return res.json({
+            id,name,email,provider
+        });
+    }
+}
+export default new UserController();
+//OU /////////////////////////////////////////////////////
 const User = require('../models/User');
 
 module.exports = {
