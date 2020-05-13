@@ -1,8 +1,8 @@
 # Estruturas de pastas em Node
 
-Exemplo de estrutuas de pastas em node para uma api rest.
+Exemplo de estruturas de pastas em node para uma api rest completa.
 
-```
+```json
 src/
         app/
             controllers/
@@ -23,5 +23,25 @@ src/
     tmp/
         uploads/
     tools/
+```
+
+### Estrutura Básica
+
+## 
+
+```json
+src/
+        app/
+            controllers/
+            middlewares/
+            models/
+        config/
+        database/
+            migrations/
+            index.js
+        app.js
+        routes.js
+        server.js
+tools/
 ```
 
