@@ -1,5 +1,7 @@
 # Envio de arquivos com o Multer
 
+## Começando a utilizar o Multer
+
 O multer é uma biblioteca que lida com arquivos físicos em sua aplicação 
 
 ### Instalar Multer
@@ -47,5 +49,84 @@ const upload = multer(multerConfig);
 routes.post('/files', upload.single('file'), (req, res) => {
     return res.json({ ok: true })
 })
+```
+
+---
+
+## Referenciando os arquivos
+
+### Criando Tabela Files
+
+Criando a tabela para realizar a referência entre o usuário e seu avatar(arquivo)
+
+```
+npx sequelize migration:create --name=create-files
+```
+
+Deixe o arquivo da seguinte Maneira
+
+```js
+'use strict';
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('files', { 
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      path: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+    });
+  },
+
+  down: (queryInterface) => {
+    return queryInterface.dropTable('files');
+  }
+};
+
+```
+
+Para executar a migration para o Banco de Dados
+
+```
+npx sequelize  db:migrate
+```
+
+### Crie o Model da tabela Files
+
+```js
+import Sequelize, { Model } from 'sequelize';
+
+class File extends Model {
+    static init (sequelize){
+        super.init({
+            name: Sequelize.STRING,
+            path: Sequelize.STRING,
+        },
+        {
+            sequelize
+        });
+        return this;
+    }
+}
+
+export default File;
 ```
 

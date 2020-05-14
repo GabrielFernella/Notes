@@ -31,14 +31,11 @@ nodemon -D // reinicia o servidor express
 
 ```js
 //Lista o processo da porta
-	netstat -a -n -o
+    netstat -a -n -o
 
 //Mata o Processo da porta
-	taskkill /PID processo /F
-
+    taskkill /PID processo /F
 ```
-
-
 
 ## Sequelize
 
@@ -89,11 +86,7 @@ adonis route:list
 
 ## Knex
 
-## 
+```js
 
-
-
-
-
-
+```
 
