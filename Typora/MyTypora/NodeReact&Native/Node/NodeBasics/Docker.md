@@ -8,6 +8,12 @@ Site com containers já prontos: [Repositórios](https://hub.docker.com)
 
 ## Comandos básicos para começar com o Docker
 
+Instalação SQL server 
+
+```
+docker pull microsoft/mssql-server-linux
+```
+
 Mostra os Containers ativos na sua máquina
 
 ```
