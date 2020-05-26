@@ -1,5 +1,3 @@
-# 
-
 <h1> Configurações de desenvolvimento com TypeScript</h1>
 
 # Config Alura
@@ -74,3 +72,4 @@ Após a conclusão do comando, veremos uma série de mensagens de erro, inclusiv
 ----
 
 # Config Rocketseat
+

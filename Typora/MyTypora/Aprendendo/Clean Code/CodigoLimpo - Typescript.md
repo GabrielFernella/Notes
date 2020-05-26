@@ -1,21 +1,21 @@
 # Código Limpo Typescript
 
-Conceitos de _Código Limpo_ adaptados para TypeScript.
+Conceitos de *Código Limpo* adaptados para TypeScript.
 Inspirado em [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
 
 ## Conteúdos
 
-1. [Introdução](#introdução)
-2. [Variáveis](#variáveis)
-3. [Funções](#funções)
+1. [Introdução](#introdu%C3%A7%C3%A3o)
+2. [Variáveis](#vari%C3%A1veis)
+3. [Funções](#fun%C3%A7%C3%B5es)
 4. [Objetos e Estruturas de dados](#objetos-e-estruturas-de-dados)
 5. [Classes](#classes)
 6. [SOLID](#solid)
 7. [Testando](#testando)
-8. [Concorrência](#concorrência)
+8. [Concorrência](#concorr%C3%AAncia)
 9. [Tratamento de erros](#tratamento-de-erros)
-10. [Formatação](#formatação)
-11. [Comentários](#comentários)
+10. [Formatação](#formata%C3%A7%C3%A3o)
+11. [Comentários](#coment%C3%A1rios)
 
 ## Introdução
 
@@ -23,13 +23,13 @@ Inspirado em [clean-code-javascript](https://github.com/ryanmcdermott/clean-code
 you shout when reading code](../../../UpImgsTypora/wtfm.jpg)
 
 Principios da engenharia de software, do livro de Robert C. Martin
-[_Código Limpo_](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882), para TypeScript. Isto não é um style guide.
+[*Código Limpo*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882), para TypeScript. Isto não é um style guide.
 É um guia para desenvolver software [legível, reutilizavel, e refatorável](https://github.com/ryanmcdermott/3rs-of-software-architecture) em TypeScript.
 
 Nem todos principios contidos aqui tem de ser seguidos estritamente,
 e muito menos irão ser universalmente aprovados.
 Estes são apenas guias e nada mais, mas que foram codificados durante muito
-anos por experiências coletivas dos autores de _Código Limpo_.
+anos por experiências coletivas dos autores de *Código Limpo*.
 
 Nosso trabalho de engenharia de software tem aproximadamente 50 anos de idade,
 e ainda estamos aprendendo muito. Quando arquitetura de software for
@@ -166,7 +166,7 @@ for (const [id, user] of users) {
 ### Evite mapear mentalmente
 
 Explicito é melhor que implito.
-_Clareza é um Rei._
+*Clareza é um Rei.*
 
 **Ruim:**
 
@@ -267,9 +267,7 @@ Para deixar explicitos quais propriedades suas funções esperam, você pode usa
 Aqui vão algumas vantagens:
 
 1. Quando alguém olhar a assinatura da função, imediatamente será claro quais propriedades estão sendo usadas.
-
-2. Desestruturação também clone os valores primitivos especificados do objeto passado como argumento para a função. Isso ajuda a evitar efeitos colaterais. Nota: Objetos e Arrays que são desestruturados do objeto _argument_ não são clonados.
-
+2. Desestruturação também clone os valores primitivos especificados do objeto passado como argumento para a função. Isso ajuda a evitar efeitos colaterais. Nota: Objetos e Arrays que são desestruturados do objeto *argument* não são clonados.
 3. TypeScript irá te avisar quando haver propriedades não utilizadas, o que seria impossivel sem usar desestruturação.
 
 **Ruim:**
@@ -715,14 +713,13 @@ console.log(name);
 
 No JavaScript, primitivos são passados por valores e objetos/arrays são passados por referência. No caso dos objetos e arrays, se sua função faz uma mudança em um array de carrinho de loja, por exemplo, adicionando um item à compra, então todas outras funções que usam esse array serão afetadas por esta adição. Isso pode ser bom, mas pode ser ruim também. Vamos imaginar um cenário ruim:
 
-O usuário clica em "Comprar", botão que chama uma função de compra, que envia uma requisição com o array de carrinho de compras ao servidor. Por conta de uma conexão ruim, a função de comprar precisa ficar tentando novamente a requisição. Agora, e se o usuário, neste meio tempo, clicar no botão "Adicionar ao carrinho", em um item que ele não quer, antes da requisição começar? Se isso acontecer e a requisição começar, a função de compra irá enviar o item adicionado acidentalmente, pois este tem a referência do mesmo array anterior e que a função _addItemToCart_ modificou, ao adicionar um item novo.
+O usuário clica em "Comprar", botão que chama uma função de compra, que envia uma requisição com o array de carrinho de compras ao servidor. Por conta de uma conexão ruim, a função de comprar precisa ficar tentando novamente a requisição. Agora, e se o usuário, neste meio tempo, clicar no botão "Adicionar ao carrinho", em um item que ele não quer, antes da requisição começar? Se isso acontecer e a requisição começar, a função de compra irá enviar o item adicionado acidentalmente, pois este tem a referência do mesmo array anterior e que a função *addItemToCart* modificou, ao adicionar um item novo.
 
-Uma ótima solução seria a função _addItemToCart_ sempre clonar o carrinho, editar, e retornar o clone. Isso assegura que nenhuma outra função que tem a referência do carrinho será afetada pelas mudanças.
+Uma ótima solução seria a função *addItemToCart* sempre clonar o carrinho, editar, e retornar o clone. Isso assegura que nenhuma outra função que tem a referência do carrinho será afetada pelas mudanças.
 
 Dois avisos ao mencionar essa abordagem:
 
 1. Podem haver casos onde você quer modificar o objeto inputado, mas quando você adota esse prática você verá que esses casos são bem raros. A maiorias das coisas podem ser refatoradas para não terem efeitos colaterais! (veja [funções puras](https://en.wikipedia.org/wiki/Pure_function))
-
 2. Clonar grandes objetos pode ser bem caro em termos de performance. Com sorte, isso não é um grande problema na prática pois há ótimas bibliotecas que permitem esse tipo de abordagem serem rápidas e não tão intensivas no consumo de memória, como seria em clonar os objetos manualmente.
 
 **Ruim:**
@@ -894,7 +891,7 @@ if (!isEmailUsed(node)) {
 
 ### Evite condicionais
 
-Isso parece uma tarefa impossivel. Quando se escuta isso pela primeira vez, a maioria das pessoas dizem, "Como eu posso fazer qualquer coisa sem declarar um `if`?" A resposta é que você pode usar polimorfismo para alcançar o mesmo objetivo em muitos casos. A segunda pergunta normalmente é, _"Bom isso é otimo, mas por que eu iria querer fazer isso?"_ A resposta é um conceito anterior de codigo limpo que aprendemos antes: Uma função deve fazer apenas uma coisa. Quando você tem classes e funções com `if` declarados, você está falando para seu usuario que sua função faz mais que uma coisa. Lembre-se apenas faça uma coisa.
+Isso parece uma tarefa impossivel. Quando se escuta isso pela primeira vez, a maioria das pessoas dizem, "Como eu posso fazer qualquer coisa sem declarar um `if`?" A resposta é que você pode usar polimorfismo para alcançar o mesmo objetivo em muitos casos. A segunda pergunta normalmente é, *"Bom isso é otimo, mas por que eu iria querer fazer isso?"* A resposta é um conceito anterior de codigo limpo que aprendemos antes: Uma função deve fazer apenas uma coisa. Quando você tem classes e funções com `if` declarados, você está falando para seu usuario que sua função faz mais que uma coisa. Lembre-se apenas faça uma coisa.
 
 **Ruim:**
 
@@ -1042,10 +1039,10 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io');
 Use generators e iterables quando trabalhar com coleções de dados que se comportam como uma corrente/fluxo.
 Há alguns bons motivos para isso:
 
-- desacopla quem está chamando o generator, deixando a ele a opção de quantos itens deseja acessar
-- 'lazy execution', os itens são chamados por demanda
-- suporte nativo para iterar itens utilizando a sintaxe `for-of`
-- 'iterables' permitem implementar um padrão mais otimizado de 'iterators'
+* desacopla quem está chamando o generator, deixando a ele a opção de quantos itens deseja acessar
+* 'lazy execution', os itens são chamados por demanda
+* suporte nativo para iterar itens utilizando a sintaxe `for-of`
+* 'iterables' permitem implementar um padrão mais otimizado de 'iterators'
 
 **Ruim:**
 
@@ -1125,11 +1122,11 @@ TypeScript suporta sintaxe de getter/setter.
 Usar getters e setters para acessar dados de objetos que encapsulam comportamento pode ser melhor do que simplesmente procurar por uma propriedade em um objeto.
 "Por que?" você pode perguntar. Bom, aqui está uma lista de razões:
 
-- Quando você quer fazer mais além de pegar uma propriedade de um objeto, você não precisa olhar e mudar todos os acessores na sua base de códigos.
-- Faz adicionar validação simples quando está setando.
-- Encapsula a representação interna;
-- Fácil de adicionar logging e tratamento de erros quando usar get e set.
-- Você pode carregar preguiçosamente as propriedades do seu objeto, vamos dizer pegar de um servido.
+* Quando você quer fazer mais além de pegar uma propriedade de um objeto, você não precisa olhar e mudar todos os acessores na sua base de códigos.
+* Faz adicionar validação simples quando está setando.
+* Encapsula a representação interna;
+* Fácil de adicionar logging e tratamento de erros quando usar get e set.
+* Você pode carregar preguiçosamente as propriedades do seu objeto, vamos dizer pegar de um servido.
 
 **Ruim:**
 
@@ -1178,7 +1175,7 @@ account.balance = 100;
 
 ### Fazer objetos ter membros privados/protegidos
 
-TypeScript suporta acessores `Publico` _(Padrão)_, `Protegido` e `Privado` em membros das classes.
+TypeScript suporta acessores `Publico` *(Padrão)*, `Protegido` e `Privado` em membros das classes.
 
 **Ruim:**
 
@@ -1405,14 +1402,12 @@ class UserNotifier {
 
 ### Prefira composição à herança
 
-Como foi muito bem pontuado em [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns), pela _Gang of Four_, você deve preferir composição à herança quando puder. Há ótimos motivos para usar herança, e ótimos motivos para usar composição. O ponto aqui é, se sua mente instintivamente pensa em heranças, tente pensar em como composições poderiam resolver seu problema de forma melhor. Em muitos casos isso é possível.
+Como foi muito bem pontuado em [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns), pela *Gang of Four*, você deve preferir composição à herança quando puder. Há ótimos motivos para usar herança, e ótimos motivos para usar composição. O ponto aqui é, se sua mente instintivamente pensa em heranças, tente pensar em como composições poderiam resolver seu problema de forma melhor. Em muitos casos isso é possível.
 
 Você pode estar pensando, "quando devo usar herança?" E isso depende do seu problema, mas aqui vai uma lista de quando usar herança faz mais sentido de que composição:
 
 1. Sua herança representa uma relação de "é um..." e não "tem um..." (Humano->Animal vs Usuário->Detalhes).
-
 2. Você pode reutilizar código das classes base (Humanos podem se mover como animais).
-
 3. Você deseja fazer mudanças globais ao alterar a classe base. (Alterar o gasto de calorias de todos os animais quando se movimentam).
 
 **Ruim:**
@@ -1881,7 +1876,6 @@ class EconomicPrinter implements IPrinter {
 Esse princípio afirma duas coisas essenciais:
 
 1. Modulos de alto nível não deveriam ser dependentes de módulos de baixo nível. Ambos devem depender de abstrações.
-
 2. Abstrações não deveriam ser dependentes de detalhes. Detalhes devem depender de abstrações.
 
 Isso pode ser dificil de entender de primeira, porém se você já trabalhou com Angular, você já viu a implementação desse principio na forma de Injeção de Dependência (Dependency Injection). Entretanto, não são conceitos idênticos, DIP mantém modulos de alto nível conhecendo os detalhes dos módulos de baixo nível e os configura. Isso pode ser feito através da Injeção de Depedencia. Um grande benficio disso é que o acoplamento entre módulos é reduzido. Acoplamento é um padrão muito ruim de desenvolvimento porque faz o seu código ser dificil de refatorar.
@@ -1984,9 +1978,7 @@ Não há desculpas para não escrever testes. Há uma vasta leva de frameworks p
 ### As três leis do TDD
 
 1. Você não pode escrever nenhum código de produção a não ser que seja para fazer um teste unitário quebrado, passar.
-
 2. Você não pode escrever mais de um teste que falhe; e erros de compilação são erros.
-
 3. Você não pode esrever mais de um código de produção do que o suficiente para passar o teste unitário que falhou.
 
 **[⬆ ir para o topo](#table-of-contents)**
@@ -1995,15 +1987,11 @@ Não há desculpas para não escrever testes. Há uma vasta leva de frameworks p
 
 Testes limpos devem seguir essas regras:
 
-- **Fast - Rápido** testes devem ser rápidos pois queremos roda-los frequentemente.
-
-- **Independent - Independente** testes não devem depender um dos outros. Eles devem retornar algo, seja ele rodado sozinho ou com outros testes.
-
-- **Repeatable - Repetitivos** testes devem ser repetitivos em qualquer ambiente e não devem haver motivos para eles falharem.
-
-- **Self-Validating - Auto-validado** um teste devem responder com _Passed_ ou _Failed_. Você não tem que comparar com arquivos de log para saber se passaram ou não.
-
-- **Timely - Pontuais** testes unitários devem ser escritos antes do código de produção. se você escrever depois, pode parar muito complicado escrever testes.
+* **Fast - Rápido** testes devem ser rápidos pois queremos roda-los frequentemente.
+* **Independent - Independente** testes não devem depender um dos outros. Eles devem retornar algo, seja ele rodado sozinho ou com outros testes.
+* **Repeatable - Repetitivos** testes devem ser repetitivos em qualquer ambiente e não devem haver motivos para eles falharem.
+* **Self-Validating - Auto-validado** um teste devem responder com *Passed* ou *Failed*. Você não tem que comparar com arquivos de log para saber se passaram ou não.
+* **Timely - Pontuais** testes unitários devem ser escritos antes do código de produção. se você escrever depois, pode parar muito complicado escrever testes.
 
 **[⬆ ir para o topo](#table-of-contents)**
 
@@ -2101,7 +2089,7 @@ describe('Calendar', () => {
 
 ### Prefira promises à callbacks
 
-Callbacks não são claros, e eles causam uma quantidade desnecessária de agrupamento _(callback hell)_.
+Callbacks não são claros, e eles causam uma quantidade desnecessária de agrupamento *(callback hell)*.
 Há utilitários que transformam funções existentes que usam callbacks para uma versão que retorna promises
 (Em Node.js há [`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original), para propositos gerais, veja [pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify))
 
@@ -2167,12 +2155,12 @@ downloadPage(
 
 Promises suportam alguns padrões que podem ser úteis em alguns casos:
 
-| Padrão                   | Descrição                                                    |
-| ------------------------ | ------------------------------------------------------------ |
-| `Promise.resolve(value)` | Converte um valor para uma promise resolvida.                |
-| `Promise.reject(error)`  | Converte um erro para uma promise rejeitada.                 |
+| Padrão                   | Descrição                                                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Promise.resolve(value)` | Converte um valor para uma promise resolvida.                                                                                                                       |
+| `Promise.reject(error)`  | Converte um erro para uma promise rejeitada.                                                                                                                        |
 | `Promise.all(promises)`  | Retorna uma nova promise, que é preenchida com um array of fulfillment values for the passed promises or rejects with the reason of the first promise that rejects. |
-| `Promise.race(promises)` | Returns a new promise which is fulfilled/rejected with the result/error of the first settled promise from the array of passed promises. |
+| `Promise.race(promises)` | Returns a new promise which is fulfilled/rejected with the result/error of the first settled promise from the array of passed promises.                             |
 
 `Promise.all` is especially useful when there is a need to run tasks in parallel. `Promise.race` makes it easier to implement things like timeouts for promises.
 
@@ -2376,29 +2364,23 @@ try {
 
 ## Formatação
 
-Formatação é subjetivo. Como todas outras regras aqui, não há uma mais rápida ou mais difícil que você deva seguir. O ponto principal é _NÃO ARGUMENTE_ formatação do código. Há várias ferramentas que automatizam isso. Escolha uma! É uma perda de tempo e dinheiro para engenheiros (de software) argumentar em cima de formatação de código. A regra geral é _seguir e manter consistente as regras de formatação_.
+Formatação é subjetivo. Como todas outras regras aqui, não há uma mais rápida ou mais difícil que você deva seguir. O ponto principal é *NÃO ARGUMENTE* formatação do código. Há várias ferramentas que automatizam isso. Escolha uma! É uma perda de tempo e dinheiro para engenheiros (de software) argumentar em cima de formatação de código. A regra geral é *seguir e manter consistente as regras de formatação*.
 
 Em TypeScript, tem uma ótima ferramenta chamada [TSLint](https://palantir.github.io/tslint/). É uma ferramenta de análise estática que pode te ajudar a melhorar drásticamente a legibilidade e manutenibilidade do seu código. Há algumas configurações prontas para serem utilizadas com TSLint.
 
-- [TSLint Config Standard](https://www.npmjs.com/package/tslint-config-standard) - Configurações padrões
-
-- [TSLint Config Airbnb](https://www.npmjs.com/package/tslint-config-airbnb) - Configurações utilizadas no Airbnb
-
-- [TSLint Clean Code](https://www.npmjs.com/package/tslint-clean-code) - Regras inspiradas no livro [Clean Code: A Handbook of Agile Software Craftsmanship](https://www.amazon.ca/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
-
-- [TSLint react](https://www.npmjs.com/package/tslint-react) - Regras para React e JSX
-
-- [TSLint + Prettier](https://www.npmjs.com/package/tslint-config-prettier) - Regras para serem usadas com o [Prettier](https://github.com/prettier/prettier).
-
-- [ESLint rules for TSLint](https://www.npmjs.com/package/tslint-eslint-rules) - Regras do ESLint p/ TypeScript
-
-- [Immutable](https://www.npmjs.com/package/tslint-immutable) - Regras para desabilitar mutações no TypeScript
+* [TSLint Config Standard](https://www.npmjs.com/package/tslint-config-standard) \- Configurações padrões
+* [TSLint Config Airbnb](https://www.npmjs.com/package/tslint-config-airbnb) \- Configurações utilizadas no Airbnb
+* [TSLint Clean Code](https://www.npmjs.com/package/tslint-clean-code) \- Regras inspiradas no livro [Clean Code: A Handbook of Agile Software Craftsmanship](https://www.amazon.ca/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
+* [TSLint react](https://www.npmjs.com/package/tslint-react) \- Regras para React e JSX
+* [TSLint + Prettier](https://www.npmjs.com/package/tslint-config-prettier) \- Regras para serem usadas com o [Prettier](https://github.com/prettier/prettier).
+* [ESLint rules for TSLint](https://www.npmjs.com/package/tslint-eslint-rules) \- Regras do ESLint p/ TypeScript
+* [Immutable](https://www.npmjs.com/package/tslint-immutable) \- Regras para desabilitar mutações no TypeScript
 
 Vale mencionar também este ótimo artigo [TypeScript StyleGuide and Coding Conventions](https://basarat.gitbook.io/typescript/styleguide).
 
 ### Capitalize de forma consistente
 
-Capitalização diz muito sobre suas variáveis, funções, etc. Essas regras são subjetivas, seu time pode escolher o que eles quiserem. Indepentente da forma que escolherem, _sejam consistentes_.
+Capitalização diz muito sobre suas variáveis, funções, etc. Essas regras são subjetivas, seu time pode escolher o que eles quiserem. Indepentente da forma que escolherem, *sejam consistentes*.
 
 **Ruim:**
 
@@ -2558,7 +2540,6 @@ type Shape {
 **Bom:**
 
 ```ts
-
 type EmailConfig {
   // ...
 }
@@ -2590,18 +2571,18 @@ class Square implements Shape {
 
 Com declarações de import fáceis e limpas de ler, você consegue rapidamente ver as dependências do seu código. Assegure-se de que está aplicando as boas práticas para fazer imports:
 
-- Imports devem ser em ordem alfabética e agrupados.
-- Imports não utilizadas tem de ser removidos.
-- Imports com nomes devem estar em ordem alfabética (ex.: `import {A, B, C} from 'foo';`).
-- As fontes do seu imports devem estar em ordem alfabética dividido em grupos, ex.: `import * as foo from 'a'; import * as bar from 'b';`
-- Grupos de imports são separados por espaços em branco.
-- Grupos devem respeitar a seguinte ordem:
-  - polyfills (ex.: `import 'reflect-metadata';`)
-  - módulos do node (ex.: `import fs from 'fs';`)
-  - módulos externos (ex.: `import { query } from 'itiriri';`)
-  - módulos internos (ex.: `import { UserService } from 'src/services/userService';`)
-  - módulos de um diretório pai (ex.: `import foo from '../foo'; import qux from '../../foo/qux';`)
-  - módulos de um mesmo diretório (ex.: `import bar from './bar'; import baz from './bar/baz';`)
+* Imports devem ser em ordem alfabética e agrupados.
+* Imports não utilizadas tem de ser removidos.
+* Imports com nomes devem estar em ordem alfabética (ex.: `import {A, B, C} from 'foo';`).
+* As fontes do seu imports devem estar em ordem alfabética dividido em grupos, ex.: `import * as foo from 'a'; import * as bar from 'b';`
+* Grupos de imports são separados por espaços em branco.
+* Grupos devem respeitar a seguinte ordem:
+  * polyfills (ex.: `import 'reflect-metadata';`)
+  * módulos do node (ex.: `import fs from 'fs';`)
+  * módulos externos (ex.: `import { query } from 'itiriri';`)
+  * módulos internos (ex.: `import { UserService } from 'src/services/userService';`)
+  * módulos de um diretório pai (ex.: `import foo from '../foo'; import qux from '../../foo/qux';`)
+  * módulos de um mesmo diretório (ex.: `import bar from './bar'; import baz from './bar/baz';`)
 
 **Ruim:**
 
@@ -2671,7 +2652,7 @@ import {UserService} from '@services/UserService';
 O uso de comentários é uma indicação que você falhou ao se expressar sem eles. Seu código deve ser sua única fonte.
 
 > Don’t comment bad code—rewrite it. (Não comente código ruim - Reescreva-o.)
-> — _Brian W. Kernighan and P. J. Plaugher_
+> — *Brian W. Kernighan and P. J. Plaugher*
 
 ### Use código que se auto-explica ao invés de comentários
 
@@ -2753,7 +2734,7 @@ function combine(a: number, b: number): number {
 ### Evite marcadores posicionados
 
 Normalmente eles só sujam o código. Deixe que os nomes das funções e varáveis, juntamente com uma identação e formatação apropriada, dê uma boa estrutura visual no seu código.
-Opcionalmente você pode usar o suporte da sua IDE para _code folding_ (VSCode [folding regions](https://code.visualstudio.com/updates/v1_17#_folding-regions))
+Opcionalmente você pode usar o suporte da sua IDE para *code folding* (VSCode [folding regions](https://code.visualstudio.com/updates/v1_17#_folding-regions))
 
 **Ruim:**
 

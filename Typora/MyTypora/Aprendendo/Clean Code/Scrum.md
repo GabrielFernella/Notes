@@ -2,8 +2,6 @@
 
 # Um resumo de tudo o que você precisa saber
 
-
-
 ![img](https://miro.medium.com/max/630/1*nAPW_vULEYRtcDYRoUxHTg.png)
 
 Você já ouviu falar de Scrum? *Scrum* é um framework utilizado para *gestão dinâmica de projetos*, sendo muitas vezes aplicado para o desenvolvimento *ágil* de um software. É um processo *iterativo e incremental,* que possui **3 pilares centrais**:

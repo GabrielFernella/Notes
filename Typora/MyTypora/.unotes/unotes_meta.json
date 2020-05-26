@@ -1,0 +1,83 @@
+{
+  "name": "",
+  "isOrdered": true,
+  "folders": {
+    "Aprendendo": {
+      "name": "Aprendendo",
+      "isOrdered": true,
+      "folders": {
+        "Clean Code": {
+          "name": "Clean Code",
+          "isOrdered": true,
+          "folders": {},
+          "files": {
+            "CodigoLimpo - Typescript": 0,
+            "CodigoLimpo - Javascript": 1,
+            "Scrum": 2
+          }
+        },
+        "Dicas": {
+          "name": "Dicas",
+          "isOrdered": true,
+          "folders": {},
+          "files": {}
+        },
+        "Ideas": {
+          "name": "Ideas",
+          "isOrdered": true,
+          "folders": {},
+          "files": {}
+        },
+        "Teoria": {
+          "name": "Teoria",
+          "isOrdered": true,
+          "folders": {},
+          "files": {}
+        }
+      },
+      "files": {}
+    },
+    "DEV": {
+      "name": "DEV",
+      "isOrdered": true,
+      "folders": {
+        "Docker": {
+          "name": "Docker",
+          "isOrdered": true,
+          "folders": {},
+          "files": {}
+        },
+        "Electron": {
+          "name": "Electron",
+          "isOrdered": true,
+          "folders": {},
+          "files": {
+            "Iniciando em Electron": 0
+          }
+        },
+        "TypeScript": {
+          "name": "TypeScript",
+          "isOrdered": true,
+          "folders": {},
+          "files": {
+            "Config TypeScript": 0
+          }
+        }
+      },
+      "files": {}
+    },
+    "NodeReact&Native": {
+      "name": "NodeReact&Native",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "Others": {
+      "name": "Others",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    }
+  },
+  "files": {}
+}

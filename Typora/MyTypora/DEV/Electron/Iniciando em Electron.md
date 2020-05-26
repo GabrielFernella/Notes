@@ -2,16 +2,16 @@
 
 ## Criando a Aplicação simples
 
-Utilize os seguintes comando para instalar o electron 
+Utilize os seguintes comando para instalar o electron
 
 ```
 npm init -y
 npm install electron --save
 ```
 
-Além disse crie um arquivo chamado main.js e edite o package.json da seguinte maneira 
+Além disse crie um arquivo chamado main.js e edite o package.json da seguinte maneira
 
-```json
+``` json
 {
   "name": "electron_timer",
   "version": "1.0.0",
@@ -27,13 +27,13 @@ Além disse crie um arquivo chamado main.js e edite o package.json da seguinte m
 }
 ```
 
----
+- - -
 
 ## Primeira Tela
 
 No arquivo Main, podemos preencher da seguinte maneira para fazer um teste
 
-```js
+``` js
 const { app, BrowserWindow } = require('electron')
 
 app.on('ready', () => {
@@ -52,17 +52,17 @@ Rode o comando para executar o programa
 npm start
 ```
 
----
+- - -
 
 ## Montando janelas HTML
 
-O Electron é praticamente um navegador onde vc utilizará sua aplicação, vc pode montar uma estrutura de pastas de um site e utiliza-lo para navegar entre eles. 
+O Electron é praticamente um navegador onde vc utilizará sua aplicação, vc pode montar uma estrutura de pastas de um site e utiliza-lo para navegar entre eles.
 
-Crie uma pasta app/  e dentro crie um arquivo um index.html e pastas como css/javascript.
+Crie uma pasta app/ e dentro crie um arquivo um index.html e pastas como css/javascript.
 
 #### Index.html
 
-```html
+``` html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +79,7 @@ Crie uma pasta app/  e dentro crie um arquivo um index.html e pastas como css/ja
 
 #### app/index.css (para um exemplo)
 
-```css
+``` css
 body {
     background: #cecece;
 }
@@ -91,7 +91,7 @@ h1 {
 
 #### Main.js
 
-```js
+``` js
 const { app, BrowserWindow } = require('electron')
 
 app.on('ready', () => {
@@ -108,4 +108,4 @@ app.on('window-all-closed', () => {
 })
 ```
 
-Rode a aplicação e vc pode ver uma estrutura simples  de html no electron.
+Rode a aplicação e vc pode ver uma estrutura simples de html no electron.

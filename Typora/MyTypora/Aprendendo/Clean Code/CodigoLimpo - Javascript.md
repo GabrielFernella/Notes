@@ -2,18 +2,18 @@
 
 ## Índice
 
-1. [Introdução](#introdução)
-2. [Variáveis](#variáveis)
-3. [Funções](#funções)
+1. [Introdução](#introdu%C3%A7%C3%A3o)
+2. [Variáveis](#vari%C3%A1veis)
+3. [Funções](#fun%C3%A7%C3%B5es)
 4. [Objetos e Estruturas de Dados](#objetos-e-estruturas-de-dados)
 5. [Classes](#classes)
 6. [SOLID](#solid)
 7. [Testes](#testes)
-8. [Concorrência](#concorrência)
+8. [Concorrência](#concorr%C3%AAncia)
 9. [Tratamento de Erros](#tratamento-de-erros)
-10. [Formatação](#formatação)
-11. [Comentários](#comentários)
-12. [Traduções](#traduções)
+10. [Formatação](#formata%C3%A7%C3%A3o)
+11. [Comentários](#coment%C3%A1rios)
+12. [Traduções](#tradu%C3%A7%C3%B5es)
 
 ## Introdução
 
@@ -35,23 +35,23 @@ Mais uma coisa: aprender isto não irá lhe transformar imediatamente em um dese
 
 **Ruim:**
 
-```javascript
+``` javascript
 const yyyymmdstr = moment().format('YYYY/MM/DD');
 ```
 
 **Bom:**
 
-```javascript
+``` javascript
 const currentDate = moment().format('YYYY/MM/DD');
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Use o mesmo vocabulário para o mesmo tipo de variável
 
 **Ruim:**
 
-```javascript
+``` javascript
 getUserInfo();
 getClientData();
 getCustomerRecord();
@@ -59,11 +59,11 @@ getCustomerRecord();
 
 **Bom:**
 
-```javascript
+``` javascript
 getUser();
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Use nomes pesquisáveis
 
@@ -71,27 +71,27 @@ Nós iremos ler mais código que escrever. É importante que o código que escre
 
 **Ruim:**
 
-```javascript
+``` javascript
 // Para que diabos serve 86400000?
 setTimeout(blastOff, 86400000);
 ```
 
 **Bom:**
 
-```javascript
+``` javascript
 // Declare-as como `const` global em letras maiúsculas.
 const MILLISECONDS_IN_A_DAY = 86400000;
 
 setTimeout(blastOff, MILLISECONDS_IN_A_DAY);
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Use variáveis explicativas
 
 **Ruim:**
 
-```javascript
+``` javascript
 const address = 'One Infinite Loop, Cupertino 95014';
 const cityZipCodeRegex = /^[^,\\]+[,\\\s]+(.+?)\s*(\d{5})?$/;
 saveCityZipCode(address.match(cityZipCodeRegex)[1], address.match(cityZipCodeRegex)[2]);
@@ -99,14 +99,14 @@ saveCityZipCode(address.match(cityZipCodeRegex)[1], address.match(cityZipCodeReg
 
 **Bom:**
 
-```javascript
+``` javascript
 const address = 'One Infinite Loop, Cupertino 95014';
 const cityZipCodeRegex = /^[^,\\]+[,\\\s]+(.+?)\s*(\d{5})?$/;
 const [, city, zipCode] = address.match(cityZipCodeRegex) || [];
 saveCityZipCode(city, zipCode);
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Evite Mapeamento Mental
 
@@ -114,7 +114,7 @@ Explicito é melhor que implícito.
 
 **Ruim:**
 
-```javascript
+``` javascript
 const locations = ['Austin', 'New York', 'San Francisco'];
 locations.forEach((l) => {
   doStuff();
@@ -129,7 +129,7 @@ locations.forEach((l) => {
 
 **Bom:**
 
-```javascript
+``` javascript
 const locations = ['Austin', 'New York', 'San Francisco'];
 locations.forEach((location) => {
   doStuff();
@@ -141,7 +141,7 @@ locations.forEach((location) => {
 });
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Não adicione contextos desnecessários
 
@@ -149,7 +149,7 @@ Se o nome de sua classe/objeto já lhe diz alguma coisa, não as repita nos nome
 
 **Ruim:**
 
-```javascript
+``` javascript
 const Car = {
   carMake: 'Honda',
   carModel: 'Accord',
@@ -163,7 +163,7 @@ function paintCar(car) {
 
 **Bom:**
 
-```javascript
+``` javascript
 const Car = {
   make: 'Honda',
   model: 'Accord',
@@ -175,7 +175,7 @@ function paintCar(car) {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Use argumentos padrões ao invés de curto circuitar ou usar condicionais
 
@@ -183,7 +183,7 @@ Argumentos padrões são geralmente mais limpos do que curto circuitos. Esteja c
 
 **Ruim:**
 
-```javascript
+``` javascript
 function createMicrobrewery(name) {
   const breweryName = name || 'Hipster Brew Co.';
   // ...
@@ -192,13 +192,13 @@ function createMicrobrewery(name) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function createMicrobrewery(breweryName = 'Hipster Brew Co.') {
   // ...
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **Funções**
 
@@ -218,7 +218,7 @@ Para tornar mais óbvio quais as propriedades que as funções esperam, você po
 
 **Ruim:**
 
-```javascript
+``` javascript
 function createMenu(title, body, buttonText, cancellable) {
   // ...
 }
@@ -226,7 +226,7 @@ function createMenu(title, body, buttonText, cancellable) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function createMenu({ title, body, buttonText, cancellable }) {
   // ...
 }
@@ -239,7 +239,7 @@ createMenu({
 });
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Funções devem fazer uma coisa
 
@@ -247,7 +247,7 @@ Essa é de longe a regra mais importante em engenharia de software. Quando funç
 
 **Ruim:**
 
-```javascript
+``` javascript
 function emailClients(clients) {
   clients.forEach((client) => {
     const clientRecord = database.lookup(client);
@@ -260,7 +260,7 @@ function emailClients(clients) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function emailActiveClients(clients) {
   clients
     .filter(isActiveClient)
@@ -273,13 +273,13 @@ function isActiveClient(client) {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Nomes de funções devem dizer o que elas fazem
 
 **Ruim:**
 
-```javascript
+``` javascript
 function addToDate(date, month) {
   // ...
 }
@@ -292,7 +292,7 @@ addToDate(date, 1);
 
 **Bom:**
 
-```javascript
+``` javascript
 function addMonthToDate(month, date) {
   // ...
 }
@@ -301,7 +301,7 @@ const date = new Date();
 addMonthToDate(1, date);
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Funções devem ter apenas um nível de abstração
 
@@ -309,7 +309,7 @@ Quando você tem mais de um nível de abstração sua função provavelmente est
 
 **Ruim:**
 
-```javascript
+``` javascript
 function parseBetterJSAlternative(code) {
   const REGEXES = [
     // ...
@@ -336,7 +336,7 @@ function parseBetterJSAlternative(code) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function tokenize(code) {
   const REGEXES = [
     // ...
@@ -371,7 +371,7 @@ function parseBetterJSAlternative(code) {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Remova código duplicado
 
@@ -386,7 +386,7 @@ Conseguir a abstração correta é crítico, por isso que você deveria seguir o
 
 **Ruim:**
 
-```javascript
+``` javascript
 function showDeveloperList(developers) {
   developers.forEach((developer) => {
     const expectedSalary = developer.calculateExpectedSalary();
@@ -420,7 +420,7 @@ function showManagerList(managers) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function showEmployeeList(employees) {
   employees.forEach((employee) => {
     const expectedSalary = employee.calculateExpectedSalary();
@@ -445,13 +445,13 @@ function showEmployeeList(employees) {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Defina (set) objetos padrões com Object.assign
 
 **Ruim:**
 
-```javascript
+``` javascript
 const menuConfig = {
   title: null,
   body: 'Bar',
@@ -471,7 +471,7 @@ createMenu(menuConfig);
 
 **Bom:**
 
-```javascript
+``` javascript
 const menuConfig = {
   title: 'Order',
   // Usuário não incluiu a chave 'body'
@@ -494,7 +494,7 @@ function createMenu(config) {
 createMenu(menuConfig);
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Não use flags como parâmetros de funções
 
@@ -502,7 +502,7 @@ Flags falam para o seu usuário que sua função faz mais de uma coisa. Funçõe
 
 **Ruim:**
 
-```javascript
+``` javascript
 function createFile(name, temp) {
   if (temp) {
     fs.create(`./temp/${name}`);
@@ -514,7 +514,7 @@ function createFile(name, temp) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function createFile(name) {
   fs.create(name);
 }
@@ -524,7 +524,7 @@ function createTempFile(name) {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Evite Efeitos Colaterais (parte 1)
 
@@ -536,7 +536,7 @@ O ponto principal é evitar armadilhas como compartilhar o estado entre objetos 
 
 **Ruim:**
 
-```javascript
+``` javascript
 // Variável global referenciada pela função seguinte
 // Se tivéssemos outra função que usa esse nome, então seria um vetor (array) e poderia quebrar seu código
 let name = 'Ryan McDermott';
@@ -552,7 +552,7 @@ console.log(name); // ['Ryan', 'McDermott'];
 
 **Bom:**
 
-```javascript
+``` javascript
 function splitIntoFirstAndLastName(name) {
   return name.split(' ');
 }
@@ -564,7 +564,7 @@ console.log(name); // 'Ryan McDermott';
 console.log(newName); // ['Ryan', 'McDermott'];
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Evite Efeitos Colaterais (parte 2)
 
@@ -577,12 +577,11 @@ Uma ótima solução seria que a função `addCartToItem` sempre clonasse o veto
 Duas ressalvas desta abordagem:
 
 1. Podem haver casos onde você realmente quer mudar o objeto de entrada, mas quando você adota este tipo de programação, você vai descobrir que estes casos são bastante raros. A maioria das coisas podem ser refatoradas para não terem efeitos colaterais.
-
 2. Clonar objetos grandes pode ser bastante caro em termos de desempenho. Com sorte, na prática isso não é um problema, porque existem [ótimas bibliotecas](https://facebook.github.io/immutable-js/) que permitem que este tipo de programação seja rápida e não seja tão intensa no uso de memória quanto seria se você clonasse manualmente objetos e vetores.
 
 **Ruim:**
 
-```javascript
+``` javascript
 const addItemToCart = (cart, item) => {
   cart.push({ item, date: Date.now() });
 };
@@ -590,7 +589,7 @@ const addItemToCart = (cart, item) => {
 
 **Bom:**
 
-```javascript
+``` javascript
 const addItemToCart = (cart, item) => {
   return [...cart, { item, date: Date.now() }];
 };
@@ -602,7 +601,7 @@ Poluir globais é uma pratica ruim em JavaScript porque você pode causar confli
 
 **Ruim:**
 
-```javascript
+``` javascript
 Array.prototype.diff = function diff(comparisonArray) {
   const hash = new Set(comparisonArray);
   return this.filter(elem => !hash.has(elem));
@@ -611,7 +610,7 @@ Array.prototype.diff = function diff(comparisonArray) {
 
 **Bom:**
 
-```javascript
+``` javascript
 class SuperArray extends Array {
   diff(comparisonArray) {
     const hash = new Set(comparisonArray);
@@ -620,7 +619,7 @@ class SuperArray extends Array {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Favoreça programação funcional sobre programação imperativa
 
@@ -628,7 +627,7 @@ JavaScript não é uma linguagem funcional da mesma forma que Haskell é, mas te
 
 **Ruim:**
 
-```javascript
+``` javascript
 const programmerOutput = [
   {
     name: 'Uncle Bobby',
@@ -654,7 +653,7 @@ for (let i = 0; i < programmerOutput.length; i++) {
 
 **Bom:**
 
-```javascript
+``` javascript
 const programmerOutput = [
   {
     name: 'Uncle Bobby',
@@ -678,13 +677,13 @@ const totalOutput = programmerOutput
   .reduce((acc, linesOfCode) => acc + linesOfCode, INITIAL_VALUE);
 ```
 
-**[⬆ volta ao topo](#Índice)**
+**[⬆ volta ao topo](#%C3%8Dndice)**
 
 ### Encapsule condicionais
 
 **Ruim:**
 
-```javascript
+``` javascript
 if (fsm.state === 'fetching' && isEmpty(listNode)) {
   // ...
 }
@@ -692,7 +691,7 @@ if (fsm.state === 'fetching' && isEmpty(listNode)) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function shouldShowSpinner(fsm, listNode) {
   return fsm.state === 'fetching' && isEmpty(listNode);
 }
@@ -702,13 +701,13 @@ if (shouldShowSpinner(fsmInstance, listNodeInstance)) {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Evite negações de condicionais
 
 **Ruim:**
 
-```javascript
+``` javascript
 function isDOMNodeNotPresent(node) {
   // ...
 }
@@ -720,7 +719,7 @@ if (!isDOMNodeNotPresent(node)) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function isDOMNodePresent(node) {
   // ...
 }
@@ -730,7 +729,7 @@ if (isDOMNodePresent(node)) {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Evite condicionais
 
@@ -738,7 +737,7 @@ Esta parece ser uma tarefa impossível. Da primeira vez que as pessoas escutam i
 
 **Ruim:**
 
-```javascript
+``` javascript
 class Airplane {
   // ...
   getCruisingAltitude() {
@@ -756,7 +755,7 @@ class Airplane {
 
 **Bom:**
 
-```javascript
+``` javascript
 class Airplane {
   // ...
 }
@@ -783,7 +782,7 @@ class Cessna extends Airplane {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Evite checagem de tipos (parte 1)
 
@@ -791,7 +790,7 @@ JavaScript não possui tipos, o que significa que suas funções podem receber q
 
 **Ruim:**
 
-```javascript
+``` javascript
 function travelToTexas(vehicle) {
   if (vehicle instanceof Bicycle) {
     vehicle.pedal(this.currentLocation, new Location('texas'));
@@ -803,21 +802,21 @@ function travelToTexas(vehicle) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function travelToTexas(vehicle) {
   vehicle.move(this.currentLocation, new Location('texas'));
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Evite checagem de tipos (parte 2)
 
-Se você estiver trabalhando com valores primitivos básicos como strings e inteiros, e você não pode usar polimorfismo, mas ainda sente a necessidade de checar o tipo, você deveria considerar usar TypeScript. É uma excelente alternativa para o JavaScript normal, já que fornece uma tipagem estática sobre a sintaxe  padrão do JavaScript. O problema com checagem manual em JavaScript é que para se fazer bem feito requer tanta verborragia extra que a falsa “tipagem-segura” que você consegue não compensa pela perca de legibilidade. Mantenha seu JavaScript limpo, escreve bons testes, e tenha boas revisões de código. Ou, de outra forma, faça tudo isso mas com TypeScript (que, como eu falei, é uma ótima alternativa!).
+Se você estiver trabalhando com valores primitivos básicos como strings e inteiros, e você não pode usar polimorfismo, mas ainda sente a necessidade de checar o tipo, você deveria considerar usar TypeScript. É uma excelente alternativa para o JavaScript normal, já que fornece uma tipagem estática sobre a sintaxe padrão do JavaScript. O problema com checagem manual em JavaScript é que para se fazer bem feito requer tanta verborragia extra que a falsa “tipagem-segura” que você consegue não compensa pela perca de legibilidade. Mantenha seu JavaScript limpo, escreve bons testes, e tenha boas revisões de código. Ou, de outra forma, faça tudo isso mas com TypeScript (que, como eu falei, é uma ótima alternativa!).
 
 **Ruim:**
 
-```javascript
+``` javascript
 function combine(val1, val2) {
   if (typeof val1 === 'number' && typeof val2 === 'number' ||
       typeof val1 === 'string' && typeof val2 === 'string') {
@@ -830,13 +829,13 @@ function combine(val1, val2) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function combine(val1, val2) {
   return val1 + val2;
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Não otimize demais
 
@@ -844,7 +843,7 @@ Navegadores modernos fazem muitas otimizações por debaixo dos panos em tempo d
 
 **Ruim:**
 
-```javascript
+``` javascript
 // Em navegadores antigos, cada iteração de `list.length` não cacheada seria custosa
 // devido a recomputação de `list.length`. Em navegadores modernos, isto é otimizado.
 for (let i = 0, len = list.length; i < len; i++) {
@@ -854,13 +853,13 @@ for (let i = 0, len = list.length; i < len; i++) {
 
 **Bom:**
 
-```javascript
+``` javascript
 for (let i = 0; i < list.length; i++) {
   // ...
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Remova código morto
 
@@ -868,7 +867,7 @@ Código morto é tão ruim quanto código duplicado. Não existe nenhum motivo p
 
 **Ruim:**
 
-```javascript
+``` javascript
 function oldRequestModule(url) {
   // ...
 }
@@ -883,7 +882,7 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io');
 
 **Bom:**
 
-```javascript
+``` javascript
 function newRequestModule(url) {
   // ...
 }
@@ -892,7 +891,7 @@ const req = newRequestModule;
 inventoryTracker('apples', req, 'www.inventory-awesome.io');
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **Objetos e Estruturas de Dados**
 
@@ -908,7 +907,7 @@ Usar getters e setters para acessar dados em objetos é bem melhor que simplesme
 
 **Ruim:**
 
-```javascript
+``` javascript
 function makeBankAccount() {
   // ...
 
@@ -924,7 +923,7 @@ account.balance = 100;
 
 **Bom:**
 
-```javascript
+``` javascript
 function makeBankAccount() {
   // este é privado
   let balance = 0;
@@ -951,7 +950,7 @@ const account = makeBankAccount();
 account.setBalance(100);
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Faça objetos terem membros privados
 
@@ -959,7 +958,7 @@ Isto pode ser alcançado através de closures (para ES5 e além).
 
 **Ruim:**
 
-```javascript
+``` javascript
 const Employee = function(name) {
   this.name = name;
 };
@@ -976,7 +975,7 @@ console.log(`Employee name: ${employee.getName()}`); // Employee name: undefined
 
 **Bom:**
 
-```javascript
+``` javascript
 function makeEmployee(name) {
   return {
     getName() {
@@ -991,7 +990,7 @@ delete employee.name;
 console.log(`Employee name: ${employee.getName()}`); // Employee name: John Doe
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **Classes**
 
@@ -1001,7 +1000,7 @@ console.log(`Employee name: ${employee.getName()}`); // Employee name: John Doe
 
 **Ruim:**
 
-```javascript
+``` javascript
 const Animal = function(age) {
   if (!(this instanceof Animal)) {
     throw new Error('Instantiate Animal with `new`');
@@ -1041,7 +1040,7 @@ Human.prototype.speak = function speak() {};
 
 **Bom:**
 
-```javascript
+``` javascript
 class Animal {
   constructor(age) {
     this.age = age;
@@ -1069,7 +1068,7 @@ class Human extends Mammal {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Use encadeamento de métodos
 
@@ -1077,7 +1076,7 @@ Este padrão é muito útil em JavaScript e você o verá em muitas bibliotecas 
 
 **Ruim:**
 
-```javascript
+``` javascript
 class Car {
   constructor(make, model, color) {
     this.make = make;
@@ -1109,7 +1108,7 @@ car.save();
 
 **Bom:**
 
-```javascript
+``` javascript
 class Car {
   constructor(make, model, color) {
     this.make = make;
@@ -1147,7 +1146,7 @@ const car = new Car('Ford','F-150','red')
   .save();
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Prefira composição ao invés de herança
 
@@ -1161,7 +1160,7 @@ Você deve estar pensando então, "quando eu deveria usar herança?" Isso depend
 
 **Ruim:**
 
-```javascript
+``` javascript
 class Employee {
   constructor(name, email) {
     this.name = name;
@@ -1185,7 +1184,7 @@ class EmployeeTaxData extends Employee {
 
 **Bom:**
 
-```javascript
+``` javascript
 class EmployeeTaxData {
   constructor(ssn, salary) {
     this.ssn = ssn;
@@ -1208,7 +1207,7 @@ class Employee {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **SOLID**
 
@@ -1218,7 +1217,7 @@ Como dito em Código Limpo, "Nunca deveria haver mais de um motivo para uma clas
 
 **Ruim:**
 
-```javascript
+``` javascript
 class UserSettings {
   constructor(user) {
     this.user = user;
@@ -1238,7 +1237,7 @@ class UserSettings {
 
 **Bom:**
 
-```javascript
+``` javascript
 class UserAuth {
   constructor(user) {
     this.user = user;
@@ -1264,7 +1263,7 @@ class UserSettings {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Princípio do Aberto/Fechado (OCP)
 
@@ -1272,7 +1271,7 @@ Como foi dito por Bertrand Meyer, "entidades de software (classes, módulos, fun
 
 **Ruim:**
 
-```javascript
+``` javascript
 class AjaxAdapter extends Adapter {
   constructor() {
     super();
@@ -1316,7 +1315,7 @@ function makeHttpCall(url) {
 
 **Bom:**
 
-```javascript
+``` javascript
 class AjaxAdapter extends Adapter {
   constructor() {
     super();
@@ -1352,7 +1351,7 @@ class HttpRequester {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Princípio de Substituição de Liskov (LSP)
 
@@ -1362,7 +1361,7 @@ A melhor explicação para este conceito é se você tiver uma classe pai e uma 
 
 **Ruim:**
 
-```javascript
+``` javascript
 class Rectangle {
   constructor() {
     this.width = 0;
@@ -1417,7 +1416,7 @@ renderLargeRectangles(rectangles);
 
 **Bom:**
 
-```javascript
+``` javascript
 class Shape {
   setColor(color) {
     // ...
@@ -1462,7 +1461,7 @@ const shapes = [new Rectangle(4, 5), new Rectangle(4, 5), new Square(5)];
 renderLargeShapes(shapes);
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Princípio da Segregação de Interface (ISP)
 
@@ -1474,7 +1473,7 @@ Um bom exemplo para se observar que demonstra esse princípio em JavaScript é d
 
 **Ruim:**
 
-```javascript
+``` javascript
 class DOMTraverser {
   constructor(settings) {
     this.settings = settings;
@@ -1500,7 +1499,7 @@ const $ = new DOMTraverser({
 
 **Bom:**
 
-```javascript
+``` javascript
 class DOMTraverser {
   constructor(settings) {
     this.settings = settings;
@@ -1532,9 +1531,9 @@ const $ = new DOMTraverser({
 });
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
-### Princípio da Inversão de Dependência  (DIP)
+### Princípio da Inversão de Dependência (DIP)
 
 Este princípio nos diz duas coisas essenciais:
 
@@ -1543,11 +1542,11 @@ Este princípio nos diz duas coisas essenciais:
 
 Isso pode ser difícil de entender a princípio, mas se você já trabalhou com AngularJS, você já viu uma implementação deste princípio na forma de injeção de dependência (DI). Apesar de não serem conceitos idênticos, DIP não deixa módulos de alto nível saber os detalhes de seus módulos de baixo nível, assim como configurá-los. Isso pode ser alcançado através de DI. Um grande beneficio é que reduz o acoplamento entre os módulos. Acoplamento é um padrão de desenvolvimento muito ruim porque torna seu código mais difícil de ser refatorado.
 
-Como dito anteriormente, JavaScript não possui interfaces, então as abstrações que são necessárias são contratos implícitos. Que quer dizer que, os métodos e as classes que um objeto/classe expõe para outros objeto/classe. No exemplo abaixo, o contrato implícito é que qualquer módulo de Request  para `InventoryTracker` terá um método `requestItems`:
+Como dito anteriormente, JavaScript não possui interfaces, então as abstrações que são necessárias são contratos implícitos. Que quer dizer que, os métodos e as classes que um objeto/classe expõe para outros objeto/classe. No exemplo abaixo, o contrato implícito é que qualquer módulo de Request para `InventoryTracker` terá um método `requestItems`:
 
 **Ruim:**
 
-```javascript
+``` javascript
 class InventoryRequester {
   constructor() {
     this.REQ_METHODS = ['HTTP'];
@@ -1580,7 +1579,7 @@ inventoryTracker.requestItems();
 
 **Bom:**
 
-```javascript
+``` javascript
 class InventoryTracker {
   constructor(items, requester) {
     this.items = items;
@@ -1620,7 +1619,7 @@ const inventoryTracker = new InventoryTracker(['apples', 'bananas'], new Invento
 inventoryTracker.requestItems();
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **Testes**
 
@@ -1632,7 +1631,7 @@ Não existe desculpa para não escrever testes. Existem [diversos frameworks de 
 
 **Ruim:**
 
-```javascript
+``` javascript
 import assert from 'assert';
 
 describe('MakeMomentJSGreatAgain', () => {
@@ -1656,7 +1655,7 @@ describe('MakeMomentJSGreatAgain', () => {
 
 **Bom:**
 
-```javascript
+``` javascript
 import assert from 'assert';
 
 describe('MakeMomentJSGreatAgain', () => {
@@ -1680,7 +1679,7 @@ describe('MakeMomentJSGreatAgain', () => {
 });
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **Concorrência**
 
@@ -1690,7 +1689,7 @@ Callbacks não são limpos, e eles causam uma quantidade excessiva de aninhament
 
 **Ruim:**
 
-```javascript
+``` javascript
 import { get } from 'request';
 import { writeFile } from 'fs';
 
@@ -1711,7 +1710,7 @@ get('https://en.wikipedia.org/wiki/Robert_Cecil_Martin', (requestErr, response) 
 
 **Bom:**
 
-```javascript
+``` javascript
 import { get } from 'request';
 import { writeFile } from 'fs';
 
@@ -1727,15 +1726,15 @@ get('https://en.wikipedia.org/wiki/Robert_Cecil_Martin')
   });
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Async/Await são ainda mais limpas que Promessas
 
-Promessas são uma alternativa bem mais limpa que callbacks, mas o ES2017/ES8 traz `async` e `await` que oferecem uma solução ainda mais limpa. Tudo o que você precisa é uma função que tem como prefixo a palavra-chave `async`, e então você pode escrever sua logica imperativamente sem usar `then` para encadear suas funções. Use isto se você puder tirar vantagem das funcionalidades do  ES2017/ES8 hoje!
+Promessas são uma alternativa bem mais limpa que callbacks, mas o ES2017/ES8 traz `async` e `await` que oferecem uma solução ainda mais limpa. Tudo o que você precisa é uma função que tem como prefixo a palavra-chave `async`, e então você pode escrever sua logica imperativamente sem usar `then` para encadear suas funções. Use isto se você puder tirar vantagem das funcionalidades do ES2017/ES8 hoje!
 
 **Ruim:**
 
-```javascript
+``` javascript
 import { get } from 'request-promise';
 import { writeFile } from 'fs-promise';
 
@@ -1753,7 +1752,7 @@ get('https://en.wikipedia.org/wiki/Robert_Cecil_Martin')
 
 **Bom:**
 
-```javascript
+``` javascript
 import { get } from 'request-promise';
 import { writeFile } from 'fs-promise';
 
@@ -1768,7 +1767,7 @@ async function getCleanCodeArticle() {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **Tratamento de Erros**
 
@@ -1788,7 +1787,7 @@ você deveria ter um plano, ou criar caminho de código para quando isso ocorrer
 
 **Ruim:**
 
-```javascript
+``` javascript
 try {
   functionThatMightThrow();
 } catch (error) {
@@ -1798,7 +1797,7 @@ try {
 
 **Bom:**
 
-```javascript
+``` javascript
 try {
   functionThatMightThrow();
 } catch (error) {
@@ -1819,7 +1818,7 @@ caputados de `try/catch`
 
 **Ruim:**
 
-```javascript
+``` javascript
 getdata()
   .then((data) => {
     functionThatMightThrow(data);
@@ -1831,7 +1830,7 @@ getdata()
 
 **Bom:**
 
-```javascript
+``` javascript
 getdata()
   .then((data) => {
     functionThatMightThrow(data);
@@ -1847,7 +1846,7 @@ getdata()
   });
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **Formatação**
 
@@ -1869,7 +1868,7 @@ apenas seja consistente.
 
 **Ruim:**
 
-```javascript
+``` javascript
 const DAYS_IN_WEEK = 7;
 const daysInMonth = 30;
 
@@ -1885,7 +1884,7 @@ class Alpaca {}
 
 **Bom:**
 
-```javascript
+``` javascript
 const DAYS_IN_WEEK = 7;
 const DAYS_IN_MONTH = 30;
 
@@ -1899,7 +1898,7 @@ class Animal {}
 class Alpaca {}
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Funções e chamadas de funções devem estar próximas
 
@@ -1910,7 +1909,7 @@ desta maneira.
 
 **Ruim:**
 
-```javascript
+``` javascript
 class PerformanceReview {
   constructor(employee) {
     this.employee = employee;
@@ -1950,7 +1949,7 @@ review.perfReview();
 
 **Bom:**
 
-```javascript
+``` javascript
 class PerformanceReview {
   constructor(employee) {
     this.employee = employee;
@@ -1988,7 +1987,7 @@ const review = new PerformanceReview(employee);
 review.perfReview();
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **Comentários**
 
@@ -1998,7 +1997,7 @@ Comentários são uma desculpa, não um requisito. Um bom código documenta-se, 
 
 **Ruim:**
 
-```javascript
+``` javascript
 function hashIt(data) {
   // A hash
   let hash = 0;
@@ -2020,7 +2019,7 @@ function hashIt(data) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function hashIt(data) {
   let hash = 0;
   const length = data.length;
@@ -2035,7 +2034,7 @@ function hashIt(data) {
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Não deixe código comentado na sua base de código
 
@@ -2043,7 +2042,7 @@ Controle de versão existe por uma razão. Deixar códigos velhos no seu histór
 
 **Ruim:**
 
-```javascript
+``` javascript
 doStuff();
 // doOtherStuff();
 // doSomeMoreStuff();
@@ -2052,11 +2051,11 @@ doStuff();
 
 **Bom:**
 
-```javascript
+``` javascript
 doStuff();
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Não comente registro de alterações
 
@@ -2066,7 +2065,7 @@ Utilize `git log` para pegar o histórico!
 
 **Ruim:**
 
-```javascript
+``` javascript
 /**
  * 2016-12-20: Removidas monads, não entendia elas (RM)
  * 2016-10-01: Melhoria utilizando monads especiais (JP)
@@ -2080,13 +2079,13 @@ function combine(a, b) {
 
 **Bom:**
 
-```javascript
+``` javascript
 function combine(a, b) {
   return a + b;
 }
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ### Evite marcadores de posição
 
@@ -2095,7 +2094,7 @@ com a devida identação e formatação deem a estrutura visual para o seu códi
 
 **Ruim:**
 
-```javascript
+``` javascript
 ////////////////////////////////////////////////////////////////////////////////
 // Intanciação do Scope Model
 ////////////////////////////////////////////////////////////////////////////////
@@ -2114,7 +2113,7 @@ const actions = function() {
 
 **Bom:**
 
-```javascript
+``` javascript
 $scope.model = {
   menu: 'foo',
   nav: 'bar'
@@ -2125,25 +2124,25 @@ const actions = function() {
 };
 ```
 
-**[⬆ voltar ao topo](#Índice)**
+**[⬆ voltar ao topo](#%C3%8Dndice)**
 
 ## **Traduções**
 
 Existem traduções disponíveis em outras linguas:
 
-- ![en](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/United-States.png) **Inglês**: [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
-- ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Uruguay.png) **Espanhol**: [andersontr15/clean-code-javascript](https://github.com/andersontr15/clean-code-javascript-es)
-- ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinês**:
-  - [alivebao/clean-code-js](https://github.com/alivebao/clean-code-js)
-  - [beginor/clean-code-javascript](https://github.com/beginor/clean-code-javascript)
-- ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **Alemão**: [marcbruederlin/clean-code-javascript](https://github.com/marcbruederlin/clean-code-javascript)
-- ![kr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Coreano**: [qkraudghgh/clean-code-javascript-ko](https://github.com/qkraudghgh/clean-code-javascript-ko)
-- ![pl](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Poland.png) **Polaco**: [greg-dev/clean-code-javascript-pl](https://github.com/greg-dev/clean-code-javascript-pl)
-- ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russo**:
-  - [BoryaMogila/clean-code-javascript-ru/](https://github.com/BoryaMogila/clean-code-javascript-ru/)
-  - [maksugr/clean-code-javascript](https://github.com/maksugr/clean-code-javascript)
-- ![vi](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Vietnam.png) **Vietnamita**: [hienvd/clean-code-javascript/](https://github.com/hienvd/clean-code-javascript/)
-- ![ja](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japonês**: [mitsuruog/clean-code-javascript/](https://github.com/mitsuruog/clean-code-javascript/)
-- ![id](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Indonesia.png) **Indonésio**:
-  [andirkh/clean-code-javascript/](https://github.com/andirkh/clean-code-javascript/)
-- Repositório original: [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
+* ![en](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/United-States.png) **Inglês**: [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
+* ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Uruguay.png) **Espanhol**: [andersontr15/clean-code-javascript](https://github.com/andersontr15/clean-code-javascript-es)
+* ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinês**:
+    * [alivebao/clean-code-js](https://github.com/alivebao/clean-code-js)
+    * [beginor/clean-code-javascript](https://github.com/beginor/clean-code-javascript)
+* ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **Alemão**: [marcbruederlin/clean-code-javascript](https://github.com/marcbruederlin/clean-code-javascript)
+* ![kr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Coreano**: [qkraudghgh/clean-code-javascript-ko](https://github.com/qkraudghgh/clean-code-javascript-ko)
+* ![pl](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Poland.png) **Polaco**: [greg-dev/clean-code-javascript-pl](https://github.com/greg-dev/clean-code-javascript-pl)
+* ![ru](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russo**:
+    * [BoryaMogila/clean-code-javascript-ru/](https://github.com/BoryaMogila/clean-code-javascript-ru/)
+    * [maksugr/clean-code-javascript](https://github.com/maksugr/clean-code-javascript)
+* ![vi](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Vietnam.png) **Vietnamita**: [hienvd/clean-code-javascript/](https://github.com/hienvd/clean-code-javascript/)
+* ![ja](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japonês**: [mitsuruog/clean-code-javascript/](https://github.com/mitsuruog/clean-code-javascript/)
+* ![id](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Indonesia.png) **Indonésio**:
+[andirkh/clean-code-javascript/](https://github.com/andirkh/clean-code-javascript/)
+* Repositório original: [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
